@@ -523,7 +523,7 @@ class PSUControl(octoprint.plugin.StartupPlugin,
                 self._printer.script("psucontrol_pre_off", must_be_set=False)
 
             self._logger.info("Switching PSU Off")
-            if self.config['switchingMethod'] == 'GPIO':
+            if self.config['switchingMethod'] == 'GCODE':
                 self._logger.debug("Switching PSU Off Using GCODE: {}".format(self.config['offGCodeCommand']))
                 self._printer.commands(self.config['offGCodeCommand'])
             elif self.config['switchingMethod'] == 'SYSTEM':
@@ -536,7 +536,7 @@ class PSUControl(octoprint.plugin.StartupPlugin,
                 r = p.returncode
 
                 self._logger.debug("Off system command returned: {}".format(r))
-            elif self.config['switchingMethod'] == 'GCODE':
+            elif self.config['switchingMethod'] == 'GPIO':
                 self._logger.debug("Switching PSU Off Using GPIO: {}".format(self.config['onoffGPIOPin']))
                 pin_output = bool(0 ^ self.config['invertonoffGPIOPin'])
 
